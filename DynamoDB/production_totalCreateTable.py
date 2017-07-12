@@ -5,7 +5,7 @@ import boto3
 dynamodb = boto3.resource('dynamodb')
 
 table = dynamodb.create_table(
-    TableName='wk2demo3',
+    TableName='production_total',
     #Define attributes that describe key schema, N:number, S:string, B:binary
     AttributeDefinitions=[
         {
@@ -28,10 +28,10 @@ table = dynamodb.create_table(
             'KeyType':'RANGE'
         }
     ],
-    # Service pricing determined by ProvisionedThroughput, 5 min.
+    # Service pricing determined by ProvisionedThroughput, 5ops default.
     ProvisionedThroughput={
         'ReadCapacityUnits': 5,
         'WriteCapacityUnits': 5
     }
 )
-table.meta.client.get_waiter('table_exists').wait(TableName='wk2demo3')
+table.meta.client.get_waiter('table_exists').wait(TableName='production_total')
